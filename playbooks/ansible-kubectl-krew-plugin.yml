@@ -1,7 +1,0 @@
----
-- name: Installing-Helm
-  hosts: kubernetes_masters
-  become: true
-  roles:
-    - ansible-kubectl-krew-plugin
-...
