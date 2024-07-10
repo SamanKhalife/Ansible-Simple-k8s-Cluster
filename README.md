@@ -1,6 +1,6 @@
 # Ansible-Simple-k8s-Cluster
 
-This Ansible playbook sets up a Kubernetes cluster with one master and two workers, designed for educational purposes. For production environments, it's recommended to use [Kubespray](https://github.com/kubernetes-sigs/kubespray).
+This Ansible playbook sets up a Kubernetes cluster with one Master and two Workers (Tested on Ubuntu 22.04 and Ubuntu 22.04 ), designed for educational purposes. For production environments, it's recommended to use [Kubespray](https://github.com/kubernetes-sigs/kubespray).
 
 ## Prerequisites
 
