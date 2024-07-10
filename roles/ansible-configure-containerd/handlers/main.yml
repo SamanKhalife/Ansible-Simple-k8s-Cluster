@@ -1,0 +1,9 @@
+---
+- name: Reload systemd daemon
+  systemd:
+    daemon_reload: true
+
+- name: Restart containerd service
+  systemd:
+    name: containerd.service
+    state: restarted

@@ -1,0 +1,34 @@
+---
+- name: ensure krew archive dir exists
+  file:
+    path: "{{ krew_archive_dir }}"
+    state: directory
+
+- name: remove krew archive dir to trigger update
+  file:
+    path: "{{ krew_archive_dir }}/krew-{{ krew_arch }}"
+    state: absent
+  when: krew_update | default(False) | bool
+
+- name: unpack krew tarball
+  unarchive:
+    src: "{{ krew_tarball_url }}"
+    dest: "{{ krew_archive_dir }}"
+    remote_src: yes
+    creates: "{{ krew_archive_dir }}/krew-{{ krew_arch }}"
+
+- name: run krew install krew
+  command: "{{ krew_archive_dir }}/krew-{{ krew_arch }} install krew"
+
+- name: install krew path in global profile
+  template:
+    src: krew-path.sh
+    dest: /etc/profile.d/krew-path.sh
+  become: True
+
+- name: Install Krew plugins
+  shell: "kubectl krew install {{ item }}"
+  with_items: "{{ krew_plugins }}"
+  when: krew_plugins is defined
+
+...
